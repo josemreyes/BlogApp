@@ -55,6 +55,21 @@ app.post("/blogs",function(req,res){
     });
 });
 
+
+//SHOW ROUTE
+app.get("/blogs/:id",function(req,res){
+   //inserting the data to the db from the form
+   Blog.findById(req.params.id,function(error,foundBlog){
+       if (error) {
+           res.redirect("/blogs");
+       } else {
+           res.render("show", {blog: foundBlog});
+       }
+   });
+});
+
+
+
 app.listen(process.env.PORT,process.env.IP, function(){
     console.log("Server is running");
 });
